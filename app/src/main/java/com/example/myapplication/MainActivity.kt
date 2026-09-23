@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,22 +24,34 @@ class MainActivity : AppCompatActivity() {
         }
 
         val b =findViewById<Button>(R.id.buttonToast)
-        val numero= Random.nextInt(0,11)
         val et= findViewById<EditText>(R.id.getNumberInput)
+        val tv= findViewById<TextView>(R.id.textViewContador)
+        val tvText= tv.text
+        var numero= Random.nextInt(1,101)
         b.setOnClickListener {
-            val respuesta =numero
-            var text = "Toast text"
+            var text: String
             val comparacion: Int = et.text.toString().toIntOrNull() ?:0
-            if (respuesta<comparacion){
+            if (numero < comparacion){
                 text="El numero es menor"
-            }else if (respuesta>comparacion){
+                tv.text = "${tv.text} $comparacion, "
+                toastCLass(text)
+                et.text.clear()
+            }else if (numero > comparacion){
                 text= "El numero es mas grande"
-            }else if (respuesta==comparacion){
-                text= "Respuesta correcta"
+                tv.text= "${tv.text} $comparacion, "
+                toastCLass(text)
+                et.text.clear()
+            }else {
+                text= "Respuesta correcta el numero es $numero"
+                et.text.clear()
+                toastCLass(text)
+                numero= Random.nextInt(1,101)
+                tv.text=tvText
             }
-            val duration = Toast.LENGTH_SHORT
-            val toast = Toast.makeText(this, text, duration)
-            toast.show()
         }
+    }
+
+    private fun toastCLass(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 }
