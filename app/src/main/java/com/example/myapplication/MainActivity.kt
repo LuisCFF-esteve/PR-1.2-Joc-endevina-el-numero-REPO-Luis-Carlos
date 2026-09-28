@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
